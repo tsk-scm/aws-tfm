@@ -16,3 +16,14 @@ module "public-subnet" {
 
 }
 
+module "private-subnet" {
+  source       = "../modules/subnet"
+  vpc-id       = module.vpc.vpc-id
+  vpc-name     = "vpc1"
+  az           = ["us-east-1a", "us-east-1b"]
+  sn-cidr      = ["192.168.1.64/27", "192.168.1.96/27"]
+  sn-intent    = "Private"
+  ip-on-launch = false
+
+}
+
