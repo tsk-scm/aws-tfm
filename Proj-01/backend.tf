@@ -4,6 +4,6 @@ terraform {
     bucket         = "tskprod-terraform"
     key            = "Proj-01/terraform.tfstate"
     encrypt        = true
-    dynamodb_table = "terraform-stage"
+    dynamodb_table = "terraform-state"
   }
 }
