@@ -27,3 +27,20 @@ module "private-subnet" {
 
 }
 
+data "aws_subnet_ids" "public-sn" {
+  depends_on = [module.public-subnet]
+  vpc_id     = module.vpc.vpc-id
+  filter {
+    name   = "tag:Intent"
+    values = ["Public"]
+  }
+}
+
+module "nat-gw" {
+  source    = "../modules/nat"
+  for_each  = data.aws_subnet_ids.public-sn.ids
+  nat-name  = "nat-gw"
+  subnet-id = each.value
+
+}
+
