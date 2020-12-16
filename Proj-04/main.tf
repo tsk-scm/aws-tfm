@@ -67,7 +67,7 @@ resource "aws_security_group_rule" "public-tls" {
   from_port         = var.public-tls[count.index]
   to_port           = var.public-tls[count.index]
   protocol          = "tcp"
-  cidr_blocks       = [var.public-cidr]
+  cidr_blocks       = var.public-cidr
   security_group_id = aws_security_group.public-tls.id
 }
 
@@ -77,8 +77,8 @@ resource "aws_instance" "this" {
   instance_type               = var.instance-type
   key_name                    = var.key-name
   associate_public_ip_address = true
-  #  security_groups             = [aws_security_group.public-tls.id]
-  subnet_id = aws_subnet.public[count.index].id
+  vpc_security_group_ids      = [aws_security_group.public-tls.id]
+  subnet_id                   = aws_subnet.public[count.index].id
   tags = {
     Name        = var.project
     Description = "Managed by terraform"

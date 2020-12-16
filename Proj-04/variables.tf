@@ -34,7 +34,7 @@ variable "public-tls" {
 }
 
 variable "public-cidr" {
-  type        = string
+  type        = list(string)
   description = "Public CIDR"
 }
 
