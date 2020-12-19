@@ -18,14 +18,24 @@ variable "azs" {
   description = "Availability Zones to be used for the VPC"
 }
 
-variable "public-sn" {
+variable "dmz-sn" {
   type        = list(string)
   description = "Public Subnets"
 }
 
-variable "private-sn" {
+variable "web-sn" {
   type        = list(string)
-  description = "Private Subnets"
+  description = "Web Subnets"
+}
+
+variable "app-sn" {
+  type        = list(string)
+  description = "App Subnets"
+}
+
+variable "dbs-sn" {
+  type        = list(string)
+  description = "DB Subnets"
 }
 
 variable "public-tls" {
