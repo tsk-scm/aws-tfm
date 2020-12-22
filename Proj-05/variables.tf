@@ -37,3 +37,33 @@ variable "allow-egress-cidr" {
   type        = string
   description = "Allow egress Public CIDR blocks"
 }
+
+variable "ami" {
+  type = map(string)
+  default = {
+    "amazon"  = "ami-04d29b6f966df1537",
+    "ubuntu"  = "ami-00ddb0e5626798373",
+    "win2016" = "ami-0081abcf0bf328e32"
+  }
+}
+
+variable "instance-type" {
+  type        = string
+  description = "EC2 instance type"
+}
+
+variable "instance-name" {
+  type        = string
+  description = "EC2 instance name"
+}
+
+variable "key-name" {
+  type        = string
+  description = "SSH Key name"
+}
+
+#variable "ec2s" {
+#  type        = number
+#  description = "# EC2 Instance to create"
+#}
+
