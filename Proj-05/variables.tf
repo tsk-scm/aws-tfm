@@ -33,6 +33,11 @@ variable "allow-ingress-cidr" {
   description = "Allow Public CIDR blocks"
 }
 
+variable "ssh-port" {
+  type        = number
+  description = "SSH port"
+}
+
 variable "allow-egress-cidr" {
   type        = string
   description = "Allow egress Public CIDR blocks"
@@ -62,8 +67,7 @@ variable "key-name" {
   description = "SSH Key name"
 }
 
-#variable "ec2s" {
-#  type        = number
-#  description = "# EC2 Instance to create"
+#variable "vpc-security-group-ids" {
+#  type        = list(string)
+#  description = "List of security groups"
 #}
-

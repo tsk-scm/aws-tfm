@@ -37,3 +37,8 @@ variable "allow-egress-cidr" {
   type        = string
   description = "Allow egress Public CIDR blocks"
 }
+
+variable "ssh-port" {
+  type        = number
+  description = "SSH Port"
+}
