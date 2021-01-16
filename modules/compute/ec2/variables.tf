@@ -23,7 +23,7 @@ variable "subnet-id" {
   description = "EC2 Instance Subnet ID"
 }
 
-#variable "vpc-security-group-ids" {
-#  type        = list(string)
-#  description = "List of Security groups"
-#}
+variable "vpc-security-group-ids" {
+  type        = list(string)
+  description = "List of Security groups"
+}

@@ -6,6 +6,6 @@ output "public-ips" {
   value = module.web
 }
 
-output "public-ssh" {
-  value = module.vpc.public-ssh
+output "public-sg" {
+  value = module.vpc.public-sg
 }

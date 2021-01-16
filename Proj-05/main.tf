@@ -12,12 +12,12 @@ module "vpc" {
 }
 
 module "web" {
-  source                 = "../modules/compute/ec2"
-  count                  = length(module.vpc.public-sn)
-  ami                    = var.ami["amazon"]
-  instance-type          = var.instance-type
-  instance-name          = "${var.instance-name}${count.index}"
-  key-name               = var.key-name
-  subnet-id              = element(module.vpc.public-sn, count.index)
-#  vpc-security-group-ids = module.vpc.public-ssh
+  source        = "../modules/compute/ec2"
+  count         = length(module.vpc.public-sn)
+  ami           = var.ami["amazon"]
+  instance-type = var.instance-type
+  instance-name = "${var.instance-name}${count.index}"
+  key-name      = var.key-name
+  subnet-id     = element(module.vpc.public-sn, count.index)
+  vpc-security-group-ids = [module.vpc.public-sg]
 }

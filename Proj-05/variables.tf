@@ -67,7 +67,7 @@ variable "key-name" {
   description = "SSH Key name"
 }
 
-#variable "vpc-security-group-ids" {
-#  type        = list(string)
-#  description = "List of security groups"
-#}
+variable "vpc-security-group-ids" {
+  type        = list(string)
+  description = "List of security groups"
+}
