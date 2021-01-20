@@ -1,5 +1,6 @@
 locals {
   vpc-name = "${var.project}-vpc"
+  zero-cidr = "0.0.0.0/0"
 }
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc-cidr
@@ -91,7 +92,7 @@ resource "aws_route_table_association" "private" {
 
 resource "aws_route" "public" {
   route_table_id         = aws_route_table.public.id
-  destination_cidr_block = var.allow-egress-cidr
+  destination_cidr_block = var.zero-cidr
   gateway_id             = aws_internet_gateway.gw.id
   timeouts {
     create = "10m"
@@ -102,7 +103,7 @@ resource "aws_route" "public" {
 resource "aws_route" "private" {
   count                  = length(var.az-suffix)
   route_table_id         = element(aws_route_table.private.*.id, count.index)
-  destination_cidr_block = var.allow-egress-cidr
+  destination_cidr_block = var.zero-cidr
   nat_gateway_id         = element(aws_nat_gateway.nat.*.id, count.index)
   timeouts {
     create = "10m"
@@ -110,28 +111,3 @@ resource "aws_route" "private" {
   }
 }
 
-
-resource "aws_security_group" "allow_ssh" {
-  name        = "allow_ssh"
-  description = "Allow SSH inbound traffic"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    description = "SSH ingress for Bastian"
-    from_port   = var.ssh-port
-    to_port     = var.ssh-port
-    protocol    = "tcp"
-    cidr_blocks = var.allow-ingress-cidr
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "allow_ssh"
-  }
-}

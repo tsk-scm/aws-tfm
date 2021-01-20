@@ -4,11 +4,8 @@ module "vpc" {
   project            = var.project
   vpc-cidr           = var.vpc-cidr
   az-suffix          = var.az-suffix
-  public-cidr        = var.public-cidr
-  private-cidr       = var.private-cidr
-  allow-egress-cidr  = var.allow-egress-cidr
-  allow-ingress-cidr = var.allow-ingress-cidr
-  ssh-port           = var.ssh-port
+  public-subnets        = var.public-subnets
+  private-subnets       = var.private-subnets
 }
 
 module "web" {

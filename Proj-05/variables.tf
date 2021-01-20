@@ -18,29 +18,14 @@ variable "az-suffix" {
   description = "Availability Zone suffixes"
 }
 
-variable "public-cidr" {
+variable "public-subnets" {
   type        = list(string)
   description = "CIDR blocks for PUBLIC subnets"
 }
 
-variable "private-cidr" {
+variable "private-subnets" {
   type        = list(string)
   description = "CIDR blocks for PRIVATE subnets"
-}
-
-variable "allow-ingress-cidr" {
-  type        = list(string)
-  description = "Allow Public CIDR blocks"
-}
-
-variable "ssh-port" {
-  type        = number
-  description = "SSH port"
-}
-
-variable "allow-egress-cidr" {
-  type        = string
-  description = "Allow egress Public CIDR blocks"
 }
 
 variable "ami" {
