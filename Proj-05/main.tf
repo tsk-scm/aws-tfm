@@ -19,5 +19,5 @@ module "web" {
   instance-name = "${var.instance-name}${count.index}"
   key-name      = var.key-name
   subnet-id     = element(module.vpc.public-sn, count.index)
-  vpc-security-group-ids = [module.vpc.public-sg]
+  security_groups = [module.vpc.public-sg]
 }
