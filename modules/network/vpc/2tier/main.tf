@@ -24,7 +24,7 @@ resource "aws_internet_gateway" "gw" {
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
   count                   = length(var.az-suffix)
-  cidr_block              = var.public-cidr[count.index]
+  cidr_block              = var.public-subnets[count.index]
   availability_zone       = "${var.region}${var.az-suffix[count.index]}"
   map_public_ip_on_launch = true
   tags = {
@@ -35,7 +35,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
   vpc_id                  = aws_vpc.main.id
   count                   = length(var.az-suffix)
-  cidr_block              = var.private-cidr[count.index]
+  cidr_block              = var.private-subnets[count.index]
   availability_zone       = "${var.region}${var.az-suffix[count.index]}"
   map_public_ip_on_launch = false
   tags = {
@@ -92,7 +92,7 @@ resource "aws_route_table_association" "private" {
 
 resource "aws_route" "public" {
   route_table_id         = aws_route_table.public.id
-  destination_cidr_block = var.zero-cidr
+  destination_cidr_block = local.zero-cidr
   gateway_id             = aws_internet_gateway.gw.id
   timeouts {
     create = "10m"
@@ -103,7 +103,7 @@ resource "aws_route" "public" {
 resource "aws_route" "private" {
   count                  = length(var.az-suffix)
   route_table_id         = element(aws_route_table.private.*.id, count.index)
-  destination_cidr_block = var.zero-cidr
+  destination_cidr_block = local.zero-cidr
   nat_gateway_id         = element(aws_nat_gateway.nat.*.id, count.index)
   timeouts {
     create = "10m"

@@ -18,12 +18,12 @@ variable "az-suffix" {
   description = "Availability Zone suffixes"
 }
 
-variable "public-cidr" {
+variable "public-subnets" {
   type        = list(string)
   description = "CIDR blocks for PUBLIC subnets"
 }
 
-variable "private-cidr" {
+variable "private-subnets" {
   type        = list(string)
   description = "CIDR blocks for PRIVATE subnets"
 }
