@@ -52,7 +52,18 @@ variable "key-name" {
   description = "SSH Key name"
 }
 
-#variable "vpc-security-group-ids" {
-#  type        = list(string)
-#  description = "List of security groups"
-#}
+
+variable "sg_ingress_rules" {
+  description = "Ingress security group rules"
+  type        = map(any)
+}
+
+variable "sg-name" {
+  type        = string
+  description = "Security Group Suffix"
+}
+
+variable "sg-description" {
+  type = string
+  description = "Security Group Description"
+}

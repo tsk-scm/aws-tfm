@@ -18,3 +18,12 @@ module "vpc" {
 #   subnet-id     = element(module.vpc.public-sn, count.index)
 #   security_groups = [module.vpc.public-sg]
 # }
+
+module "sg" {
+  source           = "../modules/network/securitygroup"
+  vpc_id           = module.vpc.vpcid
+  project          = var.project
+  sg-name          = var.sg-name
+  sg_ingress_rules = var.sg_ingress_rules
+  sg-description = var.sg-description
+}
