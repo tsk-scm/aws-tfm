@@ -12,6 +12,7 @@ key-name = "Awskey"
 sg-name = "bastian-sg"
 sg_ingress_rules = {
   "1" = {
+    type = "ingress"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -19,11 +20,20 @@ sg_ingress_rules = {
     description = "HTTP"
   },
   "2" = {
+    type = "ingress"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
     description = "SSH"
+  },
+  "3" = {
+    type = "egress"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Egress All Open"
   }
 }
 sg-description = "Security Group for Bastian"

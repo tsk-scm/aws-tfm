@@ -64,6 +64,6 @@ variable "sg-name" {
 }
 
 variable "sg-description" {
-  type = string
+  type        = string
   description = "Security Group Description"
 }

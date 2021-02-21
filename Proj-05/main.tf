@@ -20,10 +20,10 @@ module "vpc" {
 # }
 
 module "sg" {
-  source           = "../modules/network/securitygroup"
+  source           = "../modules/network/sg"
   vpc_id           = module.vpc.vpcid
   project          = var.project
   sg-name          = var.sg-name
   sg_ingress_rules = var.sg_ingress_rules
-  sg-description = var.sg-description
+  sg-description   = var.sg-description
 }
